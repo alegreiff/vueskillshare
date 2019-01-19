@@ -6,16 +6,19 @@
       <p v-else>Logged in as <br> {{ currentUser }}</p>
     </div>
     <form>
-      <div class="form-group row">
+      <div v-if="!currentUser">
+        <div class="form-group row">
         <label class="col-sm-3">Correo</label>
-          <input type="email" class="form-control" id="email" placeholder="enter email">
+          <input type="email" class="form-control" id="email" placeholder="alegreiff@gmail.com">
       </div>
       <div class="form-group row">
         <label class="col-sm-3">Password</label>
-          <input type="password" class="form-control" id="password" placeholder="enter email">
+          <input type="password" class="form-control" id="password" placeholder="enter pass">
       </div>
       <button type="button" class="btn btn-primary" @click.prevent="signIn">Entrar</button>
-      <button type="button" class="btn btn-danger" @click.prevent="signOut">Salir</button>
+      </div>
+
+      <button v-if="currentUser" type="button" class="btn btn-danger" @click.prevent="signOut">Salir</button>
     </form>
 
   </div>
@@ -51,7 +54,7 @@ methods: {
   signOut(){
     Firebase.auth().signOut()
     .then(function() {
-      alert('Logged out')
+      //alert('Logged out')
     })
     .catch(function(error){
       alert('Problemas')

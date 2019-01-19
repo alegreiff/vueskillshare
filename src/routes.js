@@ -19,7 +19,7 @@ export const routes = [
   }},
   { path: '/menu', name: 'menuLink',  component: Menu},
   { path: '/admin', name: 'adminLink',  component: Admin, beforeEnter: (to, from, next) => {
-    alert("ADMINS ONLY.. PL LOGIN")
+    //alert("ADMINS ONLY.. PL LOGIN")
     next();
   }},
   { path: '/about', name: 'aboutLink',  component: About, children: [
