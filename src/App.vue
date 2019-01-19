@@ -1,28 +1,78 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+<div id="app">
+  <div class="container">
+    <pp-header></pp-header>
   </div>
+  <div class="container">
+    <router-view></router-view>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12 col-md-4">
+        <router-view name="ordering-guide"></router-view>
+      </div>
+      <div class="col-sm-12 col-md-4">
+        <router-view name="delivery"></router-view>
+      </div>
+      <div class="col-sm-12 col-md-4">
+        <router-view name="history"></router-view>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <pp-footer></pp-footer>
+  </div>
+</div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Header from './components/Header.vue'
+import Footer from './components/Footer.vue'
+import { dbMenuRef, dbOrdersRef } from './firebaseConfig'
 
 export default {
-  name: 'app',
   components: {
-    HelloWorld
-  }
+    ppHeader: Header,
+    ppFooter: Footer,
+  },
+  created() {
+    this.$store.dispatch('setMenuRef', dbMenuRef)
+    this.$store.dispatch('setOrdersRef', dbOrdersRef)
+  },
 }
 </script>
 
-<style lang="scss">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+<style>
+header, footer{
+  background: #eceeef;
+  padding: 40px 0;
+  font-size: 1.2em;
+}
+.card{
+  background-color: #69ab64;
+  margin: 20px 0;
+  border-radius: 0;
+
+}
+#home{
+  background: url('./assets/piza.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 800ox;
+  padding: 10%;
+}
+
+h1,
+h2 {
+  margin: 6%;
+}
+
+.background {
+  background-color: #eee;
+  opacity: 0.8;
+  max-width: 60%;
+  margin: 0 auto;
+  padding: 20px 0;
 }
 </style>
